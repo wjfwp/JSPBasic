@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.getCharacterEncoding();
+	String name = request.getParameter("name");
+	String cm = request.getParameter("cm");
+	String kg = request.getParameter("kg");
+	
+	double dcm = Double.parseDouble("cm");
+	double dkg = Double.parseDouble("kg");
+	double bmi = dkg / (dcm/100 * dcm/100);
+
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%=name %>
+	<%=cm %>
+	<%=bmi %>
+	
+
+</body>
+</html>
