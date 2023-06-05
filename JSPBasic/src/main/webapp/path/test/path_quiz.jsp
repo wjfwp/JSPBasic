@@ -24,5 +24,7 @@
 	<img alt="상대" src="../../jsptag/1.jpg"> 
 	<img alt="절대" src="/JSPBasic/jsptag/1.jpg">
 
+	<!-- contextPath = 톰캣이 프로젝트를 구분하는 경로 -->
+
 </body>
 </html>

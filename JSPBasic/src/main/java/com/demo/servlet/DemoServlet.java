@@ -16,15 +16,18 @@ public class DemoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	//get, post메서드를 오버라이드
+	//get, post메서드를 오버라이
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!
 		
+		//컨텐츠타입, 인코딩타입 -  response객체에서
+		resp.setContentType("text/html; charset=UTF-8;");
 		PrintWriter out = resp.getWriter();
+		out.println("<b>헬로월드</b>");
 		
-		out.println("hello wordl");
+		
 		
 	}
 
