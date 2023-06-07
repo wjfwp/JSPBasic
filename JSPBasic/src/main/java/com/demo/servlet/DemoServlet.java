@@ -16,7 +16,7 @@ public class DemoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	//get, post메서드를 오버라이
+	//get, post메서드를 오버라이드
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
