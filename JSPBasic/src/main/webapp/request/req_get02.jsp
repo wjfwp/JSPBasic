@@ -7,10 +7,6 @@
 	String pw = request.getParameter("pw");
 	String[] agree = request.getParameterValues("agree"); //input태그의 복수 name을 받을 때
 	
-	
-	
-	
-	
 %>
     
 <!DOCTYPE html>

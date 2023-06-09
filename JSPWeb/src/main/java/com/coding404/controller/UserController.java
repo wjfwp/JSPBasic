@@ -1,6 +1,8 @@
 package com.coding404.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,6 +56,8 @@ public class UserController extends HttpServlet {
 		
 		//필요한 객체를 if문 바깥에 선언
 		UserService service = new UserServiceImpl();
+		//세션
+		HttpSession session = request.getSession();
 		
 		if(command.equals("/user/user_join.user")) {
 			
@@ -90,7 +94,7 @@ public class UserController extends HttpServlet {
 				
 			} else { //로그인 성공
 				//세션에 회원정보 저장 (자바에서 세션얻는 방법)
-				HttpSession session = request.getSession();
+				
 				session.setAttribute("user_id", vo.getId());
 				session.setAttribute("user_name", vo.getName());
 				
@@ -99,8 +103,54 @@ public class UserController extends HttpServlet {
 			}
 			
 		} else if(command.equals("/user/user_mypage.user")) {
-			request.getRequestDispatcher("user_mypage.user").forward(request, response);
+			
+			request.getRequestDispatcher("user_mypage.jsp").forward(request, response);
+		
+		//로그아웃 -인증수단을 삭제
+		}else if(command.equals("/user/user_logout.user")) {
+		
+			session.invalidate();
+			response.sendRedirect("user_login.user");
+		
+		//정보 수정페이지
+		} else if(command.equals("/user/user_modify.user")) {
+			
+			//회원정보를 가지고 감
+			UserVO vo = service.getInfo(request, response);
+			request.setAttribute("vo", vo);
+			
+			request.getRequestDispatcher("user_modify.jsp").forward(request, response);
+		
+		//정보 수정
+		} else if(command.equals("/user/user_update.user")) {
+			
+			int result = service.updateInfo(request, response);
+			
+			if(result == 1) { //성공(유저닉네임이 변경) 
+				
+				String name = request.getParameter("name");
+				session.setAttribute("user_name", name);
+				
+				//out객체를 이용한 메세지 전달
+				response.setContentType("text/html; charset=utf-8;");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('안녕하세요');");
+				out.println("location.href='user_mypage.user';");
+				out.println("</script>");
+				
+				
+				//response.sendRedirect("user_mypage.user");
+			} else { //실패
+				response.sendRedirect("user_modify.user");
+				
+			}
+			
+			
 		}
+		
+		
+		
 				
 				
 				
